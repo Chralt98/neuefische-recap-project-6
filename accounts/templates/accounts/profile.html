@@ -1,5 +1,32 @@
-<h1>{{ profile.user.username }}'s profile</h1>
-<p>Name: {{ profile.name }}</p>
-<p>Cohort: {{ profile.cohort }}</p>
-<p>Focus areas: {{ profile.focus_area }}</p>
-<a href="{% url 'profile-edit' %}">Edit profile</a>
+{% extends "base.html" %}
+
+{% block title %}Your profile — Learning Companion{% endblock %}
+
+{% block content %}
+  <div class="perforation" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="card">
+    <p class="profile-name">{{ profile.name|default:profile.user.username }}</p>
+    {% if profile.cohort %}
+      <span class="profile-cohort">cohort {{ profile.cohort }}</span>
+    {% endif %}
+
+    <div class="profile-section">
+      <h3>Focus</h3>
+      {% if profile.focus_area_list %}
+        <ul class="tag-list">
+          {% for tag in profile.focus_area_list %}
+            <li class="tag">{{ tag }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="empty-state">No focus areas yet. Add a few, like <code>python</code>, <code>django</code>, <code>testing</code>.</p>
+      {% endif %}
+    </div>
+
+    <div class="profile-actions">
+      <a href="{% url 'profile-edit' %}">Edit profile →</a>
+    </div>
+  </div>
+{% endblock %}

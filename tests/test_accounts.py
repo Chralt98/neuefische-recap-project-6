@@ -89,6 +89,24 @@ def test_anonymous_profile_access_redirects_to_login(client):
     assert response.url.startswith(reverse("login"))
 
 
+def test_profile_page_offers_a_logout_control(client):
+    user = User.objects.create_user(username="hank", password="StrongPassw0rd!23")
+    Profile.objects.create(user=user, name="Hank")
+    client.force_login(user)
+
+    response = client.get(reverse("profile"))
+
+    assert response.status_code == 200
+    assert f'action="{reverse("logout")}"'.encode() in response.content
+
+
+def test_anonymous_nav_offers_login_and_signup(client):
+    response = client.get(reverse("login"))
+
+    assert response.status_code == 200
+    assert reverse("signup").encode() in response.content
+
+
 def test_profile_edit_updates_fields(client):
     user = User.objects.create_user(username="gina", password="StrongPassw0rd!23")
     Profile.objects.create(user=user, name="Gina")

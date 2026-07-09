@@ -1,6 +1,55 @@
-<h1>Edit profile</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save</button>
-</form>
+{% extends "base.html" %}
+
+{% block title %}Edit profile — Learning Companion{% endblock %}
+
+{% block content %}
+  <div class="page-intro">
+    <h1>Edit your profile</h1>
+  </div>
+
+  <div class="perforation" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <p class="form-errors">{{ form.non_field_errors|join:" " }}</p>
+      {% endif %}
+
+      <div class="field">
+        <label for="{{ form.name.id_for_label }}">Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+          <ul class="errors">
+            {% for error in form.name.errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.cohort.id_for_label }}">Cohort</label>
+        {{ form.cohort }}
+        {% if form.cohort.errors %}
+          <ul class="errors">
+            {% for error in form.cohort.errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.focus_area.id_for_label }}">Focus areas</label>
+        {{ form.focus_area }}
+        <p class="help">Separate with commas, e.g. <code>python, django, testing</code>.</p>
+        {% if form.focus_area.errors %}
+          <ul class="errors">
+            {% for error in form.focus_area.errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn">Save changes</button>
+    </form>
+  </div>
+  <p class="form-footer"><a href="{% url 'profile' %}">← Back to profile</a></p>
+{% endblock %}

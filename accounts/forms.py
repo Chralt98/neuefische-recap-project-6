@@ -9,6 +9,14 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username",)
+        widgets = {
+            "username": forms.TextInput(attrs={"autocomplete": "username"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password1"].widget.attrs["autocomplete"] = "new-password"
+        self.fields["password2"].widget.attrs["autocomplete"] = "new-password"
 
 
 class ProfileForm(forms.ModelForm):

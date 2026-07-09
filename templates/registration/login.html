@@ -1,6 +1,45 @@
-<h1>Log in</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log in</button>
-</form>
+{% extends "base.html" %}
+
+{% block title %}Log in — Learning Companion{% endblock %}
+
+{% block content %}
+  <div class="page-intro">
+    <h1>Welcome back</h1>
+    <p>Pick up where you left off.</p>
+  </div>
+
+  <div class="perforation" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <p class="form-errors">{{ form.non_field_errors|join:" " }}</p>
+      {% endif %}
+
+      <div class="field">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+          <ul class="errors">
+            {% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.password.id_for_label }}">Password</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+          <ul class="errors">
+            {% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn">Log in</button>
+    </form>
+  </div>
+  <p class="form-footer">New here? <a href="{% url 'signup' %}">Start your notebook</a></p>
+{% endblock %}
