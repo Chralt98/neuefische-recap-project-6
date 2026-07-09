@@ -1,0 +1,5 @@
+<h1>{{ profile.user.username }}'s profile</h1>
+<p>Name: {{ profile.name }}</p>
+<p>Cohort: {{ profile.cohort }}</p>
+<p>Focus areas: {{ profile.focus_area }}</p>
+<a href="{% url 'profile-edit' %}">Edit profile</a>
