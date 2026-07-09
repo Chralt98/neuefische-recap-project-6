@@ -12,9 +12,10 @@ First pipeline stage for a ticket (`stage:plan`). Runs before any code is writte
 
 ## Steps
 1. Read the ticket body via `gh issue view <ticket-number>`.
-2. If the ticket touches framework mechanics not yet documented in [framework-conventions.md](../../rules/framework-conventions.md) (e.g. a new generator command, a new ORM aggregation, a new auth hook), research the framework's own docs and append the finding to that rules file so later tickets don't re-research it.
-3. Write a short checklist as a comment on the ticket: the entities/files that will be touched, the test cases that will prove the acceptance criteria, and any open questions.
-4. Relabel the ticket from `stage:plan` to `stage:implement`. Leave the board card in "In Progress".
+2. Apply [branching.md](../../rules/branching.md): check out this ticket's own branch (creating it off latest `main` if it doesn't exist yet) before touching any repo files.
+3. If the ticket touches framework mechanics not yet documented in [framework-conventions.md](../../rules/framework-conventions.md) (e.g. a new generator command, a new ORM aggregation, a new auth hook), research the framework's own docs and append the finding to that rules file so later tickets don't re-research it.
+4. Write a short checklist as a comment on the ticket: the entities/files that will be touched, the test cases that will prove the acceptance criteria, and any open questions.
+5. Relabel the ticket from `stage:plan` to `stage:implement`. Leave the board card in "In Progress".
 
 ## Guidance
 - Keep the checklist short (aim for 3-8 bullet points) — this is a plan, not a spec.

@@ -11,12 +11,13 @@ user-invocable: true
 Final pipeline stage (`stage:ship`), after review and docs are done.
 
 ## Steps
-1. Commit the ticket's changes with a message referencing the ticket (e.g. `feat: add goal CRUD (#12)`).
-2. Push the branch and open a PR with `gh pr create`, linking the ticket in the PR body (`Closes #12`).
-3. Check off the issue's task checkboxes for whatever was actually completed (see [checklist.md](../../rules/checklist.md)) via `gh issue edit --body`. Leave any task that wasn't really done unchecked and flag it instead of ticking it off.
-4. Remove the `stage:ship` label.
-5. Move the board card to "Review". If the board has no "Review" status column, create one (between "In Progress" and "Done") and use it from then on.
-6. Report the PR URL to the user.
+1. Apply [branching.md](../../rules/branching.md): confirm you're on this ticket's own branch (it should already exist) — never commit/push a ticket's work from another ticket's branch or from `main`.
+2. Commit the ticket's changes with a message referencing the ticket (e.g. `feat: add goal CRUD (#12)`).
+3. Push the branch and open a PR with `gh pr create`, linking the ticket in the PR body (`Closes #12`).
+4. Check off the issue's task checkboxes for whatever was actually completed (see [checklist.md](../../rules/checklist.md)) via `gh issue edit --body`. Leave any task that wasn't really done unchecked and flag it instead of ticking it off.
+5. Remove the `stage:ship` label.
+6. Move the board card to "Review". If the board has no "Review" status column, create one (between "In Progress" and "Done") and use it from then on.
+7. Report the PR URL to the user.
 
 ## After merge
 Never move a card to "Done" as part of this skill — opening a PR is not enough to call a ticket done. This board has the built-in `Pull request merged` and `Item closed` workflows enabled, so GitHub itself flips the card to Done once a human merges the PR (which also closes the linked issue via `Closes #12`). Leave that transition to GitHub's automation; don't touch the Status field after step 4.
