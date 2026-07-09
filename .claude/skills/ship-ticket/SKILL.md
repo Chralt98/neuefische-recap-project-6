@@ -1,6 +1,6 @@
 ---
 name: ship-ticket
-description: "Commit, push, and open a PR for a reviewed and documented ticket, checking off its completed task checkboxes, then move its board card to Review. Use for the stage:ship step of the AI factory pipeline."
+description: "Commit, push, and open a PR for a reviewed and documented ticket, doing a final sweep for any completed-but-unchecked task checkboxes, then move its board card to Review. Use for the stage:ship step of the AI factory pipeline."
 argument-hint: "<ticket-number>"
 user-invocable: true
 ---
@@ -14,7 +14,7 @@ Final pipeline stage (`stage:ship`), after review and docs are done.
 1. Apply [branching.md](../../rules/branching.md): confirm you're on this ticket's own branch (it should already exist) — never commit/push a ticket's work from another ticket's branch or from `main`.
 2. Commit the ticket's changes with a message referencing the ticket (e.g. `feat: add goal CRUD (#12)`).
 3. Push the branch and open a PR with `gh pr create`, linking the ticket in the PR body (`Closes #12`).
-4. Check off the issue's task checkboxes for whatever was actually completed (see [checklist.md](../../rules/checklist.md)) via `gh issue edit --body`. Leave any task that wasn't really done unchecked and flag it instead of ticking it off.
+4. Final sweep per [checklist.md](../../rules/checklist.md): most task checkboxes should already be checked off from `tdd-implement`; check off any remaining ones that were genuinely completed via `gh issue edit --body`. Leave any task that wasn't really done unchecked and flag it instead of ticking it off.
 5. Remove the `stage:ship` label.
 6. Move the board card to "Review". If the board has no "Review" status column, create one (between "In Progress" and "Done") and use it from then on.
 7. Report the PR URL to the user.
