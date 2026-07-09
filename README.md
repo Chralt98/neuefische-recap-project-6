@@ -90,3 +90,23 @@ Apply your DevOps week to an unfamiliar stack.
 
 - Write a `Dockerfile` for the app using the framework’s common base image and startup command, and confirm `docker build` + `docker run` serves the app.
 - Add a CI workflow (`GitHub Actions` or similar) that installs dependencies and runs the framework’s test runner on every push.
+
+## Quick Start
+
+This project uses Django (Python).
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Visit `http://127.0.0.1:8000/` in your browser to confirm the app is running.
+
+Run the test suite with:
+
+```bash
+pytest
+```
