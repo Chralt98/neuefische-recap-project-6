@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ goal.title }} — Learning Companion{% endblock %}
+
+{% block content %}
+  <div class="page-intro">
+    <h1>{{ goal.title }}</h1>
+  </div>
+
+  <div class="card">
+    <span class="tag">{{ goal.get_status_display }}</span>
+    {% if goal.description %}
+      <p>{{ goal.description }}</p>
+    {% endif %}
+    <div class="profile-actions">
+      <a href="{% url 'goal-edit' goal.pk %}">Edit →</a>
+      <a href="{% url 'goal-delete' goal.pk %}">Delete →</a>
+    </div>
+  </div>
+
+  <div class="page-intro">
+    <h2>Sessions</h2>
+    <a class="btn" href="{% url 'session-create' goal.pk %}">Log a session</a>
+  </div>
+
+  {% if goal.sessions.all %}
+    <ul class="goal-list">
+      {% for session in goal.sessions.all %}
+        <li class="card">
+          <span>{{ session.date }} — {{ session.duration }} min</span>
+          {% if session.tags_list %}
+            <ul class="tag-list">
+              {% for tag in session.tags_list %}<li class="tag">{{ tag }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+          {% if session.notes %}<p>{{ session.notes }}</p>{% endif %}
+          <div class="profile-actions">
+            <a href="{% url 'session-edit' session.pk %}">Edit →</a>
+            <a href="{% url 'session-delete' session.pk %}">Delete →</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty-state">No sessions logged yet.</p>
+  {% endif %}
+
+  <p class="form-footer"><a href="{% url 'goal-list' %}">← Back to goals</a></p>
+{% endblock %}
