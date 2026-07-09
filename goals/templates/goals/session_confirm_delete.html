@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Delete session — Learning Companion{% endblock %}
+
+{% block content %}
+  <div class="page-intro">
+    <h1>Delete this session?</h1>
+  </div>
+
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn">Delete session</button>
+    </form>
+  </div>
+  <p class="form-footer"><a href="{% url 'goal-detail' goal.pk %}">← Cancel</a></p>
+{% endblock %}

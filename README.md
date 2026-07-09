@@ -117,3 +117,11 @@ pytest
 - Signing up creates a `Profile` (one-to-one with the user) with `name`, `cohort`, and `focus_area`.
 - `focus_area` is stored as a single comma-separated `CharField` (e.g. `"python, django"`) rather than a separate tag model/library, to keep the first version simple.
 - View/edit your own profile at `/accounts/profile/` and `/accounts/profile/edit/` — these always show the logged-in user's own data, never another user's.
+
+### Goals & learning sessions
+
+- Manage your goals at `/goals/` (list), `/goals/new/`, `/goals/<pk>/` (detail, also lists that goal's sessions), `/goals/<pk>/edit/`, `/goals/<pk>/delete/`.
+- Log sessions against a goal from its detail page: `/goals/<pk>/sessions/new/`, `/sessions/<pk>/edit/`, `/sessions/<pk>/delete/`. There's no standalone sessions list — sessions are only reachable through their parent goal.
+- Every goal and session is scoped to the logged-in user; other users' goals/sessions return a 404 rather than showing up in a list.
+- Filter the goals list by status with a query param, e.g. `/goals/?status=done` (`planned`, `in-progress`, or `done`).
+- `LearningSession.tags` is stored the same way as `Profile.focus_area` — a single comma-separated `CharField`, not a separate tag model.
