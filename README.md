@@ -110,3 +110,10 @@ Run the test suite with:
 ```bash
 pytest
 ```
+
+### Auth & profile setup
+
+- Sign up at `/accounts/signup/`, log in at `/accounts/login/`, log out at `/accounts/logout/` (Django's built-in auth views).
+- Signing up creates a `Profile` (one-to-one with the user) with `name`, `cohort`, and `focus_area`.
+- `focus_area` is stored as a single comma-separated `CharField` (e.g. `"python, django"`) rather than a separate tag model/library, to keep the first version simple.
+- View/edit your own profile at `/accounts/profile/` and `/accounts/profile/edit/` — these always show the logged-in user's own data, never another user's.
